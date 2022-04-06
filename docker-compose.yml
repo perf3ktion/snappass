@@ -29,5 +29,5 @@ services:
             - "${TRAEFIK_NETWORK}"
 
 networks:
-    ${TRAEFIK_NETWORK}:
+    proxy:
         external: true
