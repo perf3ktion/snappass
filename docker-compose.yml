@@ -7,7 +7,7 @@ services:
         build: .
         image: pinterest/snappass
         networks:
-            - proxy
+            - "${TRAEFIK_NETWORK}"
         stop_signal: SIGINT
         environment:
             - REDIS_HOST=redis
@@ -26,5 +26,5 @@ services:
         image: "redis:latest"
         container_name: "redis"
         networks:
-            - proxy
+            - "${TRAEFIK_NETWORK}"
 
