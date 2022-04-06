@@ -6,7 +6,6 @@ services:
         container_name: "app"
         build: .
         image: pinterest/snappass
-        ports:
         networks:
             - proxy
         stop_signal: SIGINT
