@@ -3,16 +3,29 @@ version: '2'
 services:
 
     snappass:
+        container_name: "app"
         build: .
         image: pinterest/snappass
         ports:
-            - "5000:5000"
+        networks:
+            - "${TRAEFIK_NETWORK}"
         stop_signal: SIGINT
         environment:
             - REDIS_HOST=redis
-            - NO_SSL=True
         depends_on:
           - redis
+        labels:
+            - "traefik.enable=true"
+            - "traefik.docker.network=${TRAEFIK_NETWORK}"
+            - "traefik.http.routers.${TRAEFIK_ROUTER}.entrypoints=${TRAEFIK_ENTRYPOINT}"
+            - "traefik.http.routers.${TRAEFIK_ROUTER}.rule=Host(`${TRAEFIK_HOSTNAME}`)"
+            - "traefik.http.routers.${TRAEFIK_ROUTER}.service=${TRAEFIK_SERVICE}"
+            - "traefik.http.services.${TRAEFIK_SERVICE}.loadbalancer.server.port=${TRAEFIK_CONTAINER_PORT}"
+            - "com.centurylinklabs.watchtower.enable"
 
     redis:
         image: "redis:latest"
+        container_name: "redis"
+        networks:
+            - "${TRAEFIK_NETWORK}"
+
