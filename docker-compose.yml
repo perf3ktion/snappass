@@ -28,3 +28,6 @@ services:
         networks:
             - "${TRAEFIK_NETWORK}"
 
+networks:
+    ${TRAEFIK_NETWORK}:
+        external: true
