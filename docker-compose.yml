@@ -20,7 +20,7 @@ services:
             - "traefik.http.routers.${TRAEFIK_ROUTER}.entrypoints=${TRAEFIK_ENTRYPOINT}"
             - "traefik.http.routers.${TRAEFIK_ROUTER}.rule=Host(`${TRAEFIK_HOSTNAME}`)"
             - "traefik.http.routers.${TRAEFIK_ROUTER}.service=${TRAEFIK_SERVICE}"
-            - "traefik.http.services.${TRAEFIK_SERVICE}.loadbalancer.server.port=${TRAEFIK_CONTAINER_PORT}"
+            - "traefik.http.services.${TRAEFIK_SERVICE}.loadbalancer.server.port=5000"
             - "com.centurylinklabs.watchtower.enable"
 
     redis:
